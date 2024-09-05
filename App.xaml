@@ -1,0 +1,11 @@
+﻿<Application x:Class="Database_Example_Net80.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:Database_Example_Net80" xmlns:system="clr-namespace:System;assembly=netstandard"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+        <!--<ResourceDictionary>
+            <String x:Key="DatabaseContext"></String> connectionString="data source=(LocalDb)\MSSQLLocalDB;initial catalog=Database_Example.Models.DatabaseContext;integrated security=True;MultipleActiveResultSets=True;App=EntityFramework" providerName="System.Data.SqlClient" />
+        </ResourceDictionary>-->
+    </Application.Resources>
+</Application>
