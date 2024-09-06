@@ -7,9 +7,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using CommunityToolkit.Mvvm.ComponentModel;
+
 namespace Database_Example_Net80.ViewModels
 {
-    public abstract class ViewModelBase : INotifyPropertyChanged, IDisposable, INotifyCollectionChanged
+    public abstract class ViewModelBase : INotifyPropertyChanged, IDisposable, INotifyCollectionChanged 
     {
         public event PropertyChangedEventHandler PropertyChanged;
         public event NotifyCollectionChangedEventHandler CollectionChanged;
@@ -18,6 +20,7 @@ namespace Database_Example_Net80.ViewModels
         //{
         //    this.DBContext = DBContext; 
         //}
+
         protected virtual void OnPropertyChanged(string propertyName)
         {
             if (PropertyChanged != null)

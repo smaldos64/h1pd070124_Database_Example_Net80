@@ -10,13 +10,14 @@ namespace Database_Example_Net80.Models
 {
     public class Student : INotifyPropertyChanged
     {
-        //public string StudentName { get; set; }
         private int _studentID;
         private string _studentName;
         private string _studentLastName;
         private int _teamID;
         private Team _team;
         private List<Course> _courses;
+
+        private static string _schoolName = "TechCollege";
 
         public int StudentID 
         {
@@ -91,6 +92,18 @@ namespace Database_Example_Net80.Models
             { 
                 this._courses = value;
                 NotifyPropertyChanged("StudentCourseString");
+            }
+        }
+
+        public static string SchoolName
+        {
+            get
+            {
+                return (_schoolName);
+            }
+            set
+            {
+                _schoolName = value;
             }
         }
 

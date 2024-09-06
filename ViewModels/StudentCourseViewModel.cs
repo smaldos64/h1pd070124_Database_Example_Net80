@@ -14,6 +14,7 @@ namespace Database_Example_Net80.ViewModels
     {
         private Student _student_Object;
         private string _studentCourseString;
+        private string _schoolName = "TechCollege";
 
         public Student Student_Object
         {
@@ -40,7 +41,18 @@ namespace Database_Example_Net80.ViewModels
                 OnPropertyChanged("StudentCourseString");
             }
         }
-
+        public string SchoolName
+        {
+            get
+            {
+                return (this._schoolName);
+            }
+            set
+            {
+                this._schoolName = value;
+                OnPropertyChanged("SchoolName");
+            }
+        }
         //public StudentCourseViewModel(Student Student_Object, 
         //                              DatabaseContext DBContext) : base(DBContext)
         public StudentCourseViewModel(Student Student_Object)

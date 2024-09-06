@@ -24,8 +24,10 @@ namespace Database_Example_Net80.Models
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer(
-                "data source=(LocalDb)\\MSSQLLocalDB;initial catalog=Database_Example_Net80;integrated security=True;MultipleActiveResultSets=True;App=EntityFramework;providerName = System.Data.SqlClient");
+                "Server=(LocalDb)\\MSSQLLocalDB;Database=Database_Example_Net80;User ID=ltpe2;Password=buchwald34;TrustServerCertificate=True");
             optionsBuilder.UseLazyLoadingProxies();
+
+            //"data source=(LocalDb)\\MSSQLLocalDB;initial catalog=Database_Example_Net80;integrated security=True;MultipleActiveResultSets=True;App=EntityFramework;providerName = System.Data.SqlClient");
         }
 
         // Add a DbSet for each entity type that you want to include in your model. For more information 

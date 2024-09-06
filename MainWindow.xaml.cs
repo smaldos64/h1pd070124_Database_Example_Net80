@@ -19,6 +19,10 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using Castle.Core.Configuration;
 
+using Mapster;
+using CommunityToolkit.Mvvm.ComponentModel;
+using System.ComponentModel;
+
 namespace Database_Example_Net80
 {
     /// <summary>
@@ -40,11 +44,14 @@ namespace Database_Example_Net80
         private DatabaseContext db = new DatabaseContext();
         public static ObservableCollection<StudentCourseViewModel> StudentList = new ObservableCollection<StudentCourseViewModel>();
 
-        
         public MainWindow()
         {
             InitializeComponent();
+            //DataContext = this;
             dataGrid.DataContext = StudentList;
+            
+            // Mapster
+            TypeAdapterConfig<Student, Student>.NewConfig();
 
             //ServiceCollection services = new ServiceCollection();
             //services.ConfigureServices();
@@ -101,10 +108,9 @@ namespace Database_Example_Net80
                 dataGrid.Items.Remove(StudentViewModelObject);
             }
         }
-
         private void btnModifyStudent_Click(object sender, RoutedEventArgs e)
         {
-            int IndexInlist;
+            int IndexInList;
             int Counter;
 
             Button ThisButon = sender as Button;
@@ -114,25 +120,33 @@ namespace Database_Example_Net80
             ModifyStudentWindow dlg = new ModifyStudentWindow(StudentID);
             dlg.ShowDialog();
 
-            IndexInlist = StudentList.FindIndex(s => s.Student_Object.StudentID == StudentID);
-            //IndexInlist = 0;
-            if (-1 != IndexInlist)
+            IndexInList = StudentList.FindIndex(s => s.Student_Object.StudentID == StudentID);
+            
+            if (-1 != IndexInList)
             {
-                //StudentList[IndexInlist].Student_Object.StudentName = dlg.Student_Object.StudentName;
-                //StudentList[IndexInlist].Student_Object.StudentLastName = dlg.Student_Object.StudentLastName;
-                //StudentList[IndexInlist].Student_Object.TeamID = dlg.Student_Object.TeamID;
-                //StudentList[IndexInlist].Student_Object.Team = dlg.Student_Object.Team;
+                //StudentList[IndexInList].Student_Object.StudentName = dlg.Student_Object.StudentName;
+                //StudentList[IndexInList].Student_Object.StudentLastName = dlg.Student_Object.StudentLastName;
+                //StudentList[IndexInList].Student_Object.TeamID = dlg.Student_Object.TeamID;
+                //StudentList[IndexInList].Student_Object.Team = dlg.Student_Object.Team;
 
-                //StudentList[IndexInlist].Student_Object.Courses.Clear();
+                //StudentList[IndexInList].Student_Object.Courses.Clear();
                 //for (Counter = 0; Counter < dlg.Student_Object.Courses.Count; Counter++)
                 //{
                 //    Course CourseObject = new Course();
                 //    CourseObject.CourseID = dlg.Student_Object.Courses[Counter].CourseID;
                 //    CourseObject.CourseName = dlg.Student_Object.Courses[Counter].CourseName;
-                //    StudentList[IndexInlist].Student_Object.Courses.Add(CourseObject);
+                //    StudentList[IndexInList].Student_Object.Courses.Add(CourseObject);
                 //}
-                StudentList[IndexInlist].Student_Object = dlg.Student_Object.CopyStudentObjectFields();
-                StudentList[IndexInlist].SetCourses();
+                StudentList[IndexInList].Student_Object = dlg.Student_Object.CopyStudentObjectFields();
+                //try
+                //{
+                //    TypeAdapter.Adapt(dlg.Student_Object, StudentList[IndexInList].Student_Object);
+                //}
+                //catch (Exception ex)
+                //{
+                //    string ExceptionHere = ex.ToString();
+                //}
+                StudentList[IndexInList].SetCourses();
             }
         }
 
@@ -146,6 +160,14 @@ namespace Database_Example_Net80
             dataGrid.Items.Add(StudentList.Last());
         }
 
-        
+        private void btnNewSchoolName_Click(object sender, RoutedEventArgs e)
+        {
+            int Counter;
+            
+            for (Counter = 0; Counter < StudentList.Count; Counter++)
+            {
+                StudentList[Counter].SchoolName = txtSchoolName.Text;
+            }
+        }
     }
 }
