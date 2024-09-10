@@ -14,7 +14,7 @@ namespace Database_Example_Net80.ViewModels
     {
         private Student _student_Object;
         private string _studentCourseString;
-        private string _schoolName = "TechCollege";
+        //private string _schoolName = "TechCollege";
 
         public Student Student_Object
         {
@@ -38,21 +38,25 @@ namespace Database_Example_Net80.ViewModels
             set
             {
                 this._studentCourseString = value;
-                OnPropertyChanged("StudentCourseString");
+                //OnPropertyChanged("StudentCourseString");
+                // Mere optimalt rent kodemæssigt at have kodelinjen herover
+                // i funktionen SetCoursesString, da OnPropertyChanged så kun
+                // vil blive kaldt én gang i forbindelese med oprettelse/
+                // opdatering af en student.
             }
         }
-        public string SchoolName
-        {
-            get
-            {
-                return (this._schoolName);
-            }
-            set
-            {
-                this._schoolName = value;
-                OnPropertyChanged("SchoolName");
-            }
-        }
+        //public string SchoolName
+        //{
+        //    get
+        //    {
+        //        return (this._schoolName);
+        //    }
+        //    set
+        //    {
+        //        this._schoolName = value;
+        //        OnPropertyChanged("SchoolName");
+        //    }
+        //}
         //public StudentCourseViewModel(Student Student_Object, 
         //                              DatabaseContext DBContext) : base(DBContext)
         public StudentCourseViewModel(Student Student_Object)
@@ -60,7 +64,7 @@ namespace Database_Example_Net80.ViewModels
             this.Student_Object = Student_Object;
         }
                 
-        public void SetCourses()
+        public void SetCoursesString()
         {
             if (this.Student_Object.Courses.Count > 0)
             {
@@ -76,6 +80,11 @@ namespace Database_Example_Net80.ViewModels
                 this.StudentCourseString = "----------";
             }
             OnPropertyChanged("StudentCourseString");
+        }
+
+        public void NotifyAboutStudentUpdateAfterMapsterCloneData()
+        {
+            OnPropertyChanged("Student_Object");
         }
     }
 }

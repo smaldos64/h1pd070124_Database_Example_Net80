@@ -82,7 +82,7 @@ namespace Database_Example_Net80
             {
                 StudentCourseViewModel StudentCourseMethodWindow_Object = new StudentCourseViewModel(Student_Object);
 
-                StudentCourseMethodWindow_Object.SetCourses();
+                StudentCourseMethodWindow_Object.SetCoursesString();
                 StudentList.Add(StudentCourseMethodWindow_Object);
 
                 dataGrid.Items.Add(StudentCourseMethodWindow_Object);
@@ -137,7 +137,9 @@ namespace Database_Example_Net80
                 //    CourseObject.CourseName = dlg.Student_Object.Courses[Counter].CourseName;
                 //    StudentList[IndexInList].Student_Object.Courses.Add(CourseObject);
                 //}
-                StudentList[IndexInList].Student_Object = dlg.Student_Object.CopyStudentObjectFields();
+
+                //StudentList[IndexInList].Student_Object = dlg.Student_Object.CopyStudentObjectFields();
+
                 //try
                 //{
                 //    TypeAdapter.Adapt(dlg.Student_Object, StudentList[IndexInList].Student_Object);
@@ -146,7 +148,21 @@ namespace Database_Example_Net80
                 //{
                 //    string ExceptionHere = ex.ToString();
                 //}
-                StudentList[IndexInList].SetCourses();
+
+                StudentList[IndexInList].Student_Object.MyMapsterCloneData(dlg.Student_Object);
+                StudentList[IndexInList].NotifyAboutStudentUpdateAfterMapsterCloneData();
+                // Når mine egen Mapster funktion til at opdatere data anvendes, er det 
+                // nødvendig at kalde funktionen : NotifyAboutStudentUpdateAfterMapsterCloneData()
+                // for at tilkendegive, at der (muligvis) er sket en opdatering på 
+                // Student_Object. Dette er ikke nødvendig, hvis den anden funktion :
+                // CopyStudentObjectFields() anvendes !!! Fordelen ved at bruge min egen Mapster
+                // funktion er, at så skal man kun have én funktion til at håndtere al kopiering
+                // mellem objekter. Dette uanset om objekterne er af samme type !!! 
+                // Hvis funktionaliteten med at bruge funktionen : CopyStudentObjectFields()
+                // anvendes, skal man have en seperat funktion for hver kopiering mellem 
+                // objekter man måtte have i sit program. Og dette bliver hurtig til rigtig 
+                // mange funktioner !!!
+                StudentList[IndexInList].SetCoursesString();
             }
         }
 
@@ -156,18 +172,20 @@ namespace Database_Example_Net80
             dlg.ShowDialog();
 
             StudentList.Add(new StudentCourseViewModel(dlg.Student_Object));
-            StudentList.Last().SetCourses();
+            StudentList.Last().SetCoursesString();
             dataGrid.Items.Add(StudentList.Last());
         }
 
         private void btnNewSchoolName_Click(object sender, RoutedEventArgs e)
         {
-            int Counter;
+            //int Counter;
             
-            for (Counter = 0; Counter < StudentList.Count; Counter++)
-            {
-                StudentList[Counter].SchoolName = txtSchoolName.Text;
-            }
+            //for (Counter = 0; Counter < StudentList.Count; Counter++)
+            //{
+            //    StudentList[Counter].SchoolName = txtSchoolName.Text;
+            //}
+            GlobalValues.SchoolName = txtSchoolName.Text;
+            txtSchoolName.Text = "";
         }
     }
 }
