@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Database_Example_Net80"
         xmlns:vm="clr-namespace:Database_Example_Net80.ViewModels"
-        xmlns:gb="clr-namespace:Database_Example_Net80.Models"
+        xmlns:mo="clr-namespace:Database_Example_Net80.Models"
         mc:Ignorable="d"
         Title="Student List" Height="500" Width="860">
     <Grid>
@@ -16,7 +16,7 @@
                         <DataGridTextColumn Header="StudentID" Binding="{Binding Path=Student_Object.StudentID}" Width="Auto"></DataGridTextColumn>
                         <DataGridTextColumn Header="Navn" Binding="{Binding Path=Student_Object.StudentName}" Width="Auto"></DataGridTextColumn>
                         <DataGridTextColumn Header="Efternavn" Binding="{Binding Path=Student_Object.StudentLastName}" Width="Auto"></DataGridTextColumn>
-                        <DataGridTextColumn Header="SkoleNavn" Binding="{Binding Path=(gb:GlobalValues.SchoolName)}" Width="Auto"></DataGridTextColumn>
+                        <DataGridTextColumn Header="SkoleNavn" Binding="{Binding Path=(vm:StudentCourseViewModel.SchoolName)}" Width="Auto"></DataGridTextColumn>
                         <DataGridTextColumn Header="TeamID" Binding="{Binding Path=Student_Object.TeamID}" Width="Auto"></DataGridTextColumn>
                         <DataGridTextColumn Header="Team" Binding="{Binding Path=Student_Object.Team.TeamName}" Width="Auto"></DataGridTextColumn>
                         <DataGridTextColumn Header="Fag" Binding="{Binding Path=StudentCourseString}" Width="Auto"></DataGridTextColumn>

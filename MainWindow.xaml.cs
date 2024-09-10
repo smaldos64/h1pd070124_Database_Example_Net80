@@ -178,13 +178,7 @@ namespace Database_Example_Net80
 
         private void btnNewSchoolName_Click(object sender, RoutedEventArgs e)
         {
-            //int Counter;
-            
-            //for (Counter = 0; Counter < StudentList.Count; Counter++)
-            //{
-            //    StudentList[Counter].SchoolName = txtSchoolName.Text;
-            //}
-            GlobalValues.SchoolName = txtSchoolName.Text;
+            StudentCourseViewModel.SchoolName = txtSchoolName.Text;
             txtSchoolName.Text = "";
         }
     }

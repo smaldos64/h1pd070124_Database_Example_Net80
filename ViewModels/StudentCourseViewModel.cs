@@ -14,7 +14,34 @@ namespace Database_Example_Net80.ViewModels
     {
         private Student _student_Object;
         private string _studentCourseString;
-        //private string _schoolName = "TechCollege";
+        private static string _schoolName = "TechCollege";
+
+        public static string SchoolName
+        {
+            get
+            {
+                return (_schoolName);
+            }
+            set
+            {
+                if (_schoolName == value)
+                {
+                    return;
+                }
+                _schoolName = value;
+                RaiseStaticPropertyChanged("SchoolName");
+            }
+        }
+
+        public static event EventHandler<PropertyChangedEventArgs> StaticPropertyChanged;
+        public static void RaiseStaticPropertyChanged(string propName)
+        {
+            EventHandler<PropertyChangedEventArgs> handler = StaticPropertyChanged;
+            if (handler != null)
+            {
+                handler(null, new PropertyChangedEventArgs(propName));
+            }
+        }
 
         public Student Student_Object
         {
@@ -28,7 +55,6 @@ namespace Database_Example_Net80.ViewModels
                 OnPropertyChanged("Student_Object");
             }
         }
-
         public string StudentCourseString
         {
             get
@@ -45,20 +71,6 @@ namespace Database_Example_Net80.ViewModels
                 // opdatering af en student.
             }
         }
-        //public string SchoolName
-        //{
-        //    get
-        //    {
-        //        return (this._schoolName);
-        //    }
-        //    set
-        //    {
-        //        this._schoolName = value;
-        //        OnPropertyChanged("SchoolName");
-        //    }
-        //}
-        //public StudentCourseViewModel(Student Student_Object, 
-        //                              DatabaseContext DBContext) : base(DBContext)
         public StudentCourseViewModel(Student Student_Object)
         {
             this.Student_Object = Student_Object;
