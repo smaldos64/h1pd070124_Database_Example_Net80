@@ -47,16 +47,11 @@ namespace Database_Example_Net80
         public MainWindow()
         {
             InitializeComponent();
-            //DataContext = this;
+           
             dataGrid.DataContext = StudentList;
             
-            // Mapster
-            TypeAdapterConfig<Student, Student>.NewConfig();
-
             //ServiceCollection services = new ServiceCollection();
             //services.ConfigureServices();
-
-
             //SetupDatabaseConnection();
 
             BindStudentList();
@@ -75,6 +70,9 @@ namespace Database_Example_Net80
 
             List<Student> StudentListFromDB = new List<Student>();
             StudentListFromDB = db.Students.ToList();
+            // Her få vi fat i alle data for de studerende og også alle
+            // de til de studerende relaterede data, da der i Web Api'et
+            // er anvendt Lazy Loading. 
 
             dataGrid.Items.Clear();
 
